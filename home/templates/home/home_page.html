@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load static wagtailcore_tags %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/flickity.min.css' %}" media="screen">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" media="screen">
+{% endblock %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block carousel %}
+    <!-- Flickity HTML init -->
+{#    <div class="carousel" data-flickity='{ "wrapAround": true, "autoPlay": true,#}
+{#                                           "imagesLoaded": true, "percentPosition": false }'>#}
+{#        <video autoplay loop muted data-wow-delay="0.5s" id="video-background">#}
+{#            <source src="/media/videos/laser_ops.mp4" type="video/mp4">#}
+{#        </video>#}
+{#        <img src="https://drscdn.500px.org/photo/150707173/q%3D80_m%3D2000/d90ff52ec504dde74c7274c3e9a78bd1">#}
+{#    </div>#}
+    <header id="first">
+        <div class="header-content">
+            <div class="inner">
+                <h1 class="roboao">Robo-AO Kitt Peak</h1>
+                <!--<h1 class="cursive">Robo-AO Kitt Peak</h1>-->
+                <h2>Operating every clear night, the laser guide star adaptive optics instrument Robo-AO at
+                    the Kitt Peak 2.1-m telescope is <b>the first dedicated adaptive optics observatory</b></h2>
+{#                <hr>#}
+                <!--
+                <a href="#video-background" id="toggleVideo" data-toggle="collapse" class="btn btn-primary btn-xl">
+                Toggle Video</a> &nbsp; <a href="#one" class="btn btn-primary btn-xl page-scroll">Get Started</a>
+                -->
+            </div>
+        </div>
+        <video autoplay loop muted data-wow-delay="0.5s" id="video-background">
+            <source src="/media/videos/laser_ops.mp4" type="video/mp4">
+        </video>
+    </header>
+{% endblock %}
+
+{% block content %}
+    {{ page.body|richtext }}
+{% endblock %}
+
+{% block gallery %}
+    <!-- Flickity HTML init -->
+    <div class="gallery" data-flickity='{ "wrapAround": true, "autoPlay": true,
+                                           "imagesLoaded": true, "percentPosition": false }'>
+        <img src="/media/original_images/DSC_1190a.jpg">
+        <img src="/media/original_images/jupiter_20170406.jpeg">
+        <img src="/media/original_images/saturn_20170513.png">
+        <img src="/media/original_images/jupiter_20170407.png">
+        <img src="/media/original_images/mars_20160616.jpg">
+{#        <img src="/media/original_images/jupiter_20170501.jpg">#}
+        <img src="/media/original_images/31_koi_binary_1613_20170320.png">
+        <img src="/media/original_images/jupiter_20170309.jpg">
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/flickity.pkgd.min.js' %}"></script>
+{#    <script>#}
+{#        $(document).ready( function() {#}
+{#            var $gallery = $('.carousel').flickity();#}
+{##}
+{#            function onLoadeddata( event ) {#}
+{#                var cell = $gallery.flickity( 'getParentCell', event.target );#}
+{#                $gallery.flickity( 'cellSizeChange', cell && cell.element );#}
+{#            }#}
+{##}
+{#            $gallery.find('video').each( function( i, video ) {#}
+{#                video.play();#}
+{#                $( video ).on( 'loadeddata', onLoadeddata );#}
+{#            });#}
+{##}
+{#        });#}
+{#    </script>#}
+{% endblock %}
