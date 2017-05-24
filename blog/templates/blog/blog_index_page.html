@@ -38,43 +38,53 @@
 
     <div class="grid">
         <!-- width of .grid-sizer used for columnWidth -->
-        <div class="grid-sizer"></div>
+        <div class="grid-sizer">
             {% for post in blogpages %}
                 <div class="grid-item">
                     {% with post=post.specific %}
-{#                        <div class="media">#}
-{#                            <div class="media-body">#}
-                                <h3><a href="{% pageurl post %}">{{ post.title }}</a></h3>
-                                <h6>{{ post.date }}</h6>
+                        <h3><a href="{% pageurl post %}">{{ post.title }}</a></h3>
+                        <h6>{{ post.date }}</h6>
 
-{#                                {% with post.main_image as main_image %}#}
-{#                                    {% if main_image %}{% image main_image fill-100x100 %}{% endif %}#}
-{#                                {% endwith %}#}
+                        <div class="media">
+                            {% with post.main_image as main_image %}
+                                {% if main_image %}
+                                    {% image main_image fill-100x100 class="d-flex mr-3" %}
+                                {% endif %}
+                            {% endwith %}
+                            <div class="media-body">
+                                {{ post.intro }}
+                                <p><a href="{% pageurl post %}">Read full story</a></p>
+                            </div>
+                        </div>
 
-                                <div class="media">
-                                    {% with post.main_image as main_image %}
-                                        {% if main_image %}
-                                            {% image main_image fill-100x100 class="d-flex mr-3" %}
-                                        {% endif %}
-                                    {% endwith %}
-                                    <div class="media-body">
-                                        {{ post.intro }}
-                                        <p><a href="{% pageurl post %}">Read full story</a></p>
-                                    </div>
-                                </div>
-
-{#                                <p>{{ post.intro }}</p>#}
-
-                                {# {{ post.body|richtext }} #}
-{#                                <p><a href="{% pageurl post %}">Read full story</a></p>#}
-{#                            </div>#}
-{#                        </div>#}
-
+                        {# {{ post.body|richtext }} #}
                     {% endwith %}
                 </div>
             {% endfor %}
         </div>
     </div>
+
+    <!--pagination-->
+    <br>
+    <nav aria-label="Blog navigation">
+        <ul class="pagination{# justify-content-end#}">
+            {% if blogpages.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ blogpages.previous_page_number }}"
+                       tabindex="-1">Previous</a>
+                </li>
+            {% endif %}
+            {% for page_num in blogpages.paginator.page_range %}
+                <li class="page-item{% if page_num == blogpages.number %} active{% endif %}">
+                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+            {% endfor %}
+            {% if blogpages.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ blogpages.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
 
 {% endblock %}
 

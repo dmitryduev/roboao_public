@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
@@ -18,11 +20,36 @@ from wagtail.wagtailsearch import index
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
 
+    # def get_context(self, request):
+    #     # Update context to include only published posts, ordered by reverse-chron
+    #     context = super(BlogIndexPage, self).get_context(request)
+    #     blogpages = self.get_children().live().order_by('first_published_at')
+    #     context['blogpages'] = blogpages
+    #     return context
+
     def get_context(self, request):
-        # Update context to include only published posts, ordered by reverse-chron
         context = super(BlogIndexPage, self).get_context(request)
+
+        # Get the full unpaginated listing of resource pages as a queryset -
+        # replace this with your own query as appropriate
         blogpages = self.get_children().live().order_by('first_published_at')
-        context['blogpages'] = blogpages
+
+        paginator = Paginator(blogpages, 10)  # Show 10 resources per page
+
+        page = request.GET.get('page')
+        try:
+            # print(page, paginator.num_pages)
+            resources = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            resources = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            resources = paginator.page(paginator.num_pages)
+
+        # make the variable 'resources' available on the template
+        context['blogpages'] = resources
+
         return context
 
 
