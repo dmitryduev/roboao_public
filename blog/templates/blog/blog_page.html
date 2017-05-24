@@ -7,7 +7,12 @@
 {#    <meta property="og:type"          content="website" />#}
 {#    <meta property="og:title"         content="Robo-AO Kitt Peak" />#}
 {#    <meta property="og:description"   content="{{ page.intro }}" />#}
-{#    <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />#}
+    {% with page.main_image as main_image %}
+        {% if main_image %}
+            {% image main_image width-600 as image %}
+            <meta property="og:image"         content="{{ page.get_site.root_url }}{{ image.url }}" />
+        {% endif %}
+    {% endwith %}
 {% endblock %}
 
 {% block body_class %}template-blogpage{% endblock %}
