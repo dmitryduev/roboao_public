@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block extra_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/flickity.min.css' %}" media="screen">
@@ -8,6 +8,10 @@
 {% endblock %}
 
 {% block body_class %}template-homepage{% endblock %}
+
+{% block nav_home %}
+    active
+{% endblock %}
 
 {% block carousel %}
     <!-- Flickity HTML init -->
@@ -18,12 +22,13 @@
 {#        </video>#}
 {#        <img src="https://drscdn.500px.org/photo/150707173/q%3D80_m%3D2000/d90ff52ec504dde74c7274c3e9a78bd1">#}
 {#    </div>#}
-    <header id="first">
+    <header id="first" style="margin-top:100px !important;">
         <div class="header-content">
             <div class="inner">
                 <h1 class="roboao">Robo-AO Kitt Peak</h1>
                 <!--<h1 class="cursive">Robo-AO Kitt Peak</h1>-->
-                <h2>Operating every clear night, the laser guide star adaptive optics instrument Robo-AO at
+                <h2 style="font-weight: lighter !important;">Operating every clear night,
+                    the laser guide star adaptive optics instrument Robo-AO at
                     the Kitt Peak 2.1-m telescope is <b>the first dedicated adaptive optics observatory</b></h2>
 {#                <hr>#}
                 <!--
@@ -44,7 +49,7 @@
 
 {% block gallery %}
     <!-- Flickity HTML init -->
-    <div class="gallery" data-flickity='{ "wrapAround": true, "autoPlay": true,
+    <div class="gallery" data-flickity='{ "wrapAround": true, "autoPlay": 5000,
                                            "imagesLoaded": true, "percentPosition": false }'>
         <img src="/media/original_images/DSC_1190a.jpg">
         <img src="/media/original_images/jupiter_20170406.jpeg">
@@ -54,6 +59,36 @@
 {#        <img src="/media/original_images/jupiter_20170501.jpg">#}
         <img src="/media/original_images/31_koi_binary_1613_20170320.png">
         <img src="/media/original_images/jupiter_20170309.jpg">
+    </div>
+{% endblock %}
+
+{% block blog %}
+    <h2><a href="/blog">Recent blog posts</a></h2><br>
+    <div class="grid">
+        <!-- width of .grid-sizer used for columnWidth -->
+        <div class="grid-sizer"></div>
+        {% for post in page.blogs %}
+            {% with post=post.specific %}
+                {% with post.main_image as main_image %}
+                    {% if main_image %}
+                        <div class="grid-item grid-item--width2">
+                    {% else %}
+                        <div class="grid-item">
+                    {% endif %}
+                        <div class="media">
+                            {% if main_image %}
+                                {% image main_image fill-100x100 class="d-flex mr-3" %}
+                            {% endif %}
+                            <div class="media-body">
+                                <h5 class="mt-0"><a href="{% pageurl post %}">{{ post.title }}</a></h5>
+                                <h6>{{ post.date }}</h6>
+                                {{ post.intro }}
+                            </div>
+                        </div>
+                    </div>
+                {% endwith %}
+            {% endwith %}
+        {% endfor %}
     </div>
 {% endblock %}
 
@@ -75,4 +110,20 @@
 {##}
 {#        });#}
 {#    </script>#}
+    <script type="text/javascript">
+    $(function() {
+        // set active nav
+{#        $('#nav_home').addClass('active');#}
+        // init masonry grid
+        $('.grid').masonry({
+            // set itemSelector so .grid-sizer is not used in layout
+            itemSelector: '.grid-item',
+            // use element for option
+            columnWidth: '.grid-sizer',
+            percentPosition: true,
+            horizontalOrder: true,
+            gutter: 20
+        });
+    });
+    </script>
 {% endblock %}

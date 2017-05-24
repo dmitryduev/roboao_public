@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 from modelcluster.fields import ParentalKey
-from modelcluster.tags import ClusterTaggableManager
+from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
 # Create your models here.
@@ -21,7 +21,7 @@ class BlogIndexPage(Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(BlogIndexPage, self).get_context(request)
-        blogpages = self.get_children().live().order_by('-first_published_at')
+        blogpages = self.get_children().live().order_by('first_published_at')
         context['blogpages'] = blogpages
         return context
 

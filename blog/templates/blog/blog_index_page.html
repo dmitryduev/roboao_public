@@ -1,25 +1,97 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block extra_css %}
+    <style>
+        /* Masonry Grid */
+        :root {
+            --vertical-spacing: 20px;
+            /* must change gutter below as well */
+            --horizontal-spacing: 20px;
+        }
+
+        /* 1 column by default */
+        .grid-sizer { width: calc(100% - var(--horizontal-spacing)); }
+        .grid-item { width: calc(100% - var(--horizontal-spacing)); margin-bottom: var(--vertical-spacing);}
+
+        @media screen and (min-width: 768px) {
+            /* 2 columns for larger screens */
+            .grid-sizer { width: calc(50% - var(--horizontal-spacing)); }
+            .grid-item { width: calc(50% - var(--horizontal-spacing)); }
+        }
+    </style>
+{% endblock %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
+{% block nav_blog %}
+    active
+{% endblock %}
+
 {% block content %}
+    <br>
     <h1>{{ page.title }}</h1>
+    <br>
 
     <div class="intro">{{ page.intro|richtext }}</div>
 
-    {% for post in blogpages %}
-    {% with post=post.specific %}
-        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+    <div class="grid">
+        <!-- width of .grid-sizer used for columnWidth -->
+        <div class="grid-sizer"></div>
+            {% for post in blogpages %}
+                <div class="grid-item">
+                    {% with post=post.specific %}
+{#                        <div class="media">#}
+{#                            <div class="media-body">#}
+                                <h3><a href="{% pageurl post %}">{{ post.title }}</a></h3>
+                                <h6>{{ post.date }}</h6>
 
-        {% with post.main_image as main_image %}
-            {% if main_image %}{% image main_image fill-100x100 %}{% endif %}
-        {% endwith %}
+{#                                {% with post.main_image as main_image %}#}
+{#                                    {% if main_image %}{% image main_image fill-100x100 %}{% endif %}#}
+{#                                {% endwith %}#}
 
-        <p>{{ post.intro }}</p>
-        {{ post.body|richtext }}
-    {% endwith %}
-{% endfor %}
+                                <div class="media">
+                                    {% with post.main_image as main_image %}
+                                        {% if main_image %}
+                                            {% image main_image fill-100x100 class="d-flex mr-3" %}
+                                        {% endif %}
+                                    {% endwith %}
+                                    <div class="media-body">
+                                        {{ post.intro }}
+                                        <p><a href="{% pageurl post %}">Read full story</a></p>
+                                    </div>
+                                </div>
 
+{#                                <p>{{ post.intro }}</p>#}
+
+                                {# {{ post.body|richtext }} #}
+{#                                <p><a href="{% pageurl post %}">Read full story</a></p>#}
+{#                            </div>#}
+{#                        </div>#}
+
+                    {% endwith %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/flickity.pkgd.min.js' %}"></script>
+
+    <script type="text/javascript">
+    $(function() {
+        $('.grid').masonry({
+            // set itemSelector so .grid-sizer is not used in layout
+            itemSelector: '.grid-item',
+            // use element for option
+            columnWidth: '.grid-sizer',
+            percentPosition: true,
+            horizontalOrder: true,
+            gutter: 20
+        });
+    });
+    </script>
 {% endblock %}

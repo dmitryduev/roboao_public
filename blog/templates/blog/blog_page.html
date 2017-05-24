@@ -2,33 +2,85 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% block extra_head %}
+{#    <meta property="og:url"           content="{{ page.get_site.root_url }}{% pageurl page %}" />#}
+{#    <meta property="og:type"          content="website" />#}
+{#    <meta property="og:title"         content="Robo-AO Kitt Peak" />#}
+{#    <meta property="og:description"   content="{{ page.intro }}" />#}
+{#    <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />#}
+{% endblock %}
+
 {% block body_class %}template-blogpage{% endblock %}
 
+{% block nav_blog %}
+    active
+{% endblock %}
+
 {% block content %}
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <br>
     <h1>{{ page.title }}</h1>
     <p class="meta">{{ page.date }}</p>
+    <br>
 
     <div class="intro">{{ page.intro }}</div>
 
     {{ page.body|richtext }}
 
     {% for item in page.gallery_images.all %}
-        <div style="margin: 10px">
-            {% image item.image fill-240x240 %}
+        <div style="display:inline-block; margin-right: 10px">
+            {% image item.image width-600 as image %}
+            <a href="{{ image.url }}" data-toggle="lightbox" data-gallery="lightbox-gallery">
+                {% image item.image fill-240x240 %}</a>
             <p>{{ item.caption }}</p>
         </div>
     {% endfor %}
 
-    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+    <br>
+    <p>
+        <a href="{{ page.get_parent.url }}">Return to blog</a>
+        <!-- Share on facebook -->
+        <div class="fb-share-button" data-href="{{ page.get_site.root_url }}{% pageurl page %}"
+             data-layout="button" data-size="large" data-mobile-iframe="true">
+            <a class="fb-xfbml-parse-ignore" target="_blank"
+               href="https://www.facebook.com/sharer/sharer.php?u={{ page.get_site.root_url }}{% pageurl page %}&amp;src=sdkpreparse">Share</a></div>
+    </p>
 
 {% if page.tags.all.count %}
     <div class="tags">
-        <h3>Tags</h3>
+        tags:
         {% for tag in page.tags.all %}
-            <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+            <a href="{% slugurl 'tags' %}?tag={{ tag }}"><span class="badge badge-default">{{ tag }}</span></a>
         {% endfor %}
     </div>
 {% endif %}
 
 {% endblock %}
 
+{% block extra_js %}
+    <script type="text/javascript">
+    $(function() {
+        // set active nav
+{#        $('#nav_blog').addClass('active');#}
+{#        // init masonry grid#}
+{#        $('.grid').masonry({#}
+{#            // set itemSelector so .grid-sizer is not used in layout#}
+{#            itemSelector: '.grid-item',#}
+{#            // use element for option#}
+{#            columnWidth: '.grid-sizer',#}
+{#            percentPosition: true,#}
+{#            horizontalOrder: true,#}
+{#            gutter: 10#}
+{#        });#}
+    });
+    </script>
+{% endblock %}

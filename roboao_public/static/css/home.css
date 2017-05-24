@@ -52,7 +52,6 @@
     border-radius: 0;
 }
 
-
 header {
     position: relative;
     /*min-height: auto;*/
@@ -120,7 +119,8 @@ header .header-content .inner p {
 
     header .header-content {
         position: absolute;
-        top: 50%;
+        /*top: 50%;*/
+        top: 45%;
         padding: 0 50px;
         -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
@@ -192,3 +192,34 @@ header .header-content .inner p {
     /*}*/
 
 /*}*/
+
+
+/* Masonry Grid */
+:root {
+    --vertical-spacing: 20px;
+    /* must change gutter in home_page.html as well */
+    --horizontal-spacing: 20px;
+}
+
+/* 1 column by default */
+.grid-sizer { width: calc(100% - var(--horizontal-spacing)); }
+/*.grid-item { width: calc(50% - 10px); background: rgba(122, 122, 122, 0.49);
+margin-bottom: var(--vertical-spacing);}*/
+/*.grid-item--width2 { width: calc(100% - 10px); background: #f5f5f5; margin-bottom: var(--vertical-spacing);}*/
+.grid-item { width: calc(100% - var(--horizontal-spacing)); margin-bottom: var(--vertical-spacing);}
+.grid-item--width2 { width: calc(100% - var(--horizontal-spacing)); margin-bottom: var(--vertical-spacing);}
+
+/*!* 3 columns by default *!*/
+/*.grid-sizer { width: calc(33.333% - var(--horizontal-spacing)); }*/
+/*.grid-item { width: calc(33.333% - var(--horizontal-spacing));
+background: rgba(122, 122, 122, 0.49); margin-bottom: 10px;}*/
+/*.grid-item--width2 { width: calc(66.666% - var(--horizontal-spacing));
+background: #f5f5f5; margin-bottom: 10px;}*/
+
+@media screen and (min-width: 768px) {
+    /* 5 columns for larger screens */
+    .grid-sizer { width: calc(20% - var(--horizontal-spacing)); }
+    .grid-item { width: calc(20% - var(--horizontal-spacing)); }
+    /* 2 columns */
+    .grid-item--width2 { width: calc(40% - var(--horizontal-spacing)); }
+}
