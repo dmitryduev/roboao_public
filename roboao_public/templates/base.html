@@ -24,6 +24,8 @@
     {# Global stylesheets #}
     <link rel="stylesheet" type="text/css" href="{% static 'css/roboao_public.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-social.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/ekko-lightbox.css' %}">
 
     <link rel="icon" type="image/png" href="{% static 'robot-favicon.png'%}">
@@ -120,7 +122,20 @@
 {# footer #}
 <footer class="footer">
     <div class="container">
-        <span class="text-muted">Follow us on <a href="https://facebook.com/roboao">Facebook</a></span>
+        <div class="row">
+            <div class="col-sm-8">
+                <span class="text-muted">Follow us
+                    <a class="btn btn-social-icon btn-sm btn-facebook" href="https://facebook.com/roboao">
+                        <span class="fa fa-facebook"></span>
+                    </a>
+                </span>
+            </div>
+            <div class="col-sm-4">
+                <span class="text-muted" style="float: right;">
+                    &copy; Robo-AO 2017
+                </span>
+            </div>
+        </div>
     </div>
 </footer>
 

@@ -70,11 +70,7 @@
         {% for post in page.blogs %}
             {% with post=post.specific %}
                 {% with post.main_image as main_image %}
-                    {% if main_image %}
-                        <div class="grid-item grid-item--width2">
-                    {% else %}
-                        <div class="grid-item">
-                    {% endif %}
+                    <div class="grid-item">
                         <div class="media">
                             {% if main_image %}
                                 {% image main_image fill-100x100 class="d-flex mr-3" %}

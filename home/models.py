@@ -27,7 +27,7 @@ class HomePage(Page):
         blogs = blogs.live().order_by('-date')
 
         # return only last 5 entries
-        return blogs[:5]
+        return blogs[:8]
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full"),
