@@ -28,6 +28,13 @@
 
     <link rel="icon" type="image/png" href="{% static 'robot-favicon.png'%}">
 
+    <style>
+        {# transparent nav bar #}
+        .bg-inverse {
+            background-color: rgba(10, 10, 10, 0.9) !important;
+        }
+    </style>
+
     {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
     {% endblock %}
