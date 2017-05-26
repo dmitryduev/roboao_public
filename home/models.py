@@ -26,7 +26,7 @@ class HomePage(Page):
         # blogs = blogs.live().order_by('-first_published_at')
         blogs = blogs.live().order_by('-date')
 
-        # return only last 5 entries
+        # return only 8 most recent entries
         return blogs[:8]
 
     content_panels = Page.content_panels + [

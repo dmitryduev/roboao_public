@@ -32,7 +32,8 @@ class BlogIndexPage(Page):
 
         # Get the full unpaginated listing of resource pages as a queryset -
         # replace this with your own query as appropriate
-        blogpages = self.get_children().live().order_by('first_published_at')
+        # blogpages = self.get_children().live().order_by('first_published_at')
+        blogpages = BlogPage.objects.live().order_by('-date')
 
         paginator = Paginator(blogpages, 10)  # Show 10 resources per page
 
