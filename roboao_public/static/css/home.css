@@ -4,7 +4,6 @@
 /*body { font-family: sans-serif; }*/
 
 .carousel {
-    background: #333;
     /*height: 100%;*/
 }
 
@@ -20,10 +19,10 @@
 
 @media screen and ( min-width: 768px ) {
   .carousel img {
-    max-height: 700px;
+    max-height: 750px;
   }
   .carousel video {
-    max-height: 700px;
+    max-height: 750px;
   }
 }
 
@@ -59,7 +58,7 @@ header {
     color: #fff;
     height: 100%;
     width: 100%;
-    background-color: #c9c9c9;
+    background-color: #00212c;
     /*background-image: url('../assets/DSC_1190a.jpg');*/
     background-position: center;
     -webkit-background-size: cover;
@@ -89,14 +88,14 @@ header .header-content .inner p {
 }
 
 #video-background {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1;
 }
 
 #video-background.collapsing {
@@ -119,8 +118,8 @@ header .header-content .inner p {
 
     header .header-content {
         position: absolute;
-        /*top: 50%;*/
-        top: 45%;
+        top: 50%;
+        /*top: 45%;*/
         padding: 0 50px;
         -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
@@ -150,49 +149,6 @@ header .header-content .inner p {
     }
 
 }
-
-/*@media(min-height:800px) {*/
-    /*.icon-lg {*/
-        /*font-size: 80px;*/
-    /*}*/
-
-    /*header {*/
-        /*min-height: 800px;*/
-    /*}*/
-
-    /*header .header-content {*/
-        /*position: absolute;*/
-        /*top: 50%;*/
-        /*padding: 0 50px;*/
-        /*-webkit-transform: translateY(-50%);*/
-        /*-ms-transform: translateY(-50%);*/
-        /*transform: translateY(-50%);*/
-    /*}*/
-
-    /*header .header-content .inner {*/
-        /*margin-right: auto;*/
-        /*margin-left: auto;*/
-        /*max-width: 1000px;*/
-    /*}*/
-
-    /*header .header-content .inner h1 {*/
-        /*font-size: 53px;*/
-    /*}*/
-
-    /*header .header-content .inner p {*/
-        /*margin-right: auto;*/
-        /*margin-left: auto;*/
-        /*max-width: 80%;*/
-        /*font-size: 18px;*/
-    /*}*/
-
-    /*section {*/
-        /*min-height: 600px;*/
-        /*padding: 100px 0;*/
-    /*}*/
-
-/*}*/
-
 
 /* Masonry Grid */
 :root {

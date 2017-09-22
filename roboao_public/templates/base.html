@@ -24,7 +24,7 @@
     {# Global stylesheets #}
     <link rel="stylesheet" type="text/css" href="{% static 'css/roboao_public.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-social.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/ekko-lightbox.css' %}">
 
@@ -50,18 +50,14 @@
 
 {# navbar #}
 <!-- Fixed navbar -->
-<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse py-1">
-{#<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse py-1">#}
-{#<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse py-2">#}
-{#<nav class="navbar navbar-toggleable-md navbar-trans py-2" style="z-index: 2000;">#}
-{#<nav class="navbar navbar-toggleable-md navbar-custom py-1">#}
-{#<nav class="navbar navbar-toggleable-md navbar-trans fixed-top">#}
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-            aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-md navbar-custom fixed-top bg-inverse py-1">
+
+    <a class="navbar-brand roboao" href="/">Robo-AO</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand roboao" href="/">Robo-AO</a>
+
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item {% block nav_home %}{% endblock %}" id="nav_home">
@@ -141,13 +137,14 @@
 
 {# Global javascript #}
 <script type="text/javascript" src="{% static 'js/roboao_public.js' %}"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
         integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/ekko-lightbox.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/masonry.pkgd.min.js' %}"></script>
 {#<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>#}
